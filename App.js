@@ -117,11 +117,13 @@ export default class App extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        {this.Axis()}
-        {this.InfoPanel()}
-        {this.Actions()}
-      </SafeAreaView>
+      <View style={{ backgroundColor: '#333333', flex: 1 }}>
+        <SafeAreaView style={styles.container}>
+          {this.Axis()}
+          {this.InfoPanel()}
+          {this.Actions()}
+        </SafeAreaView>
+      </View>
     );
   }
 }
@@ -134,12 +136,14 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'white'
   },
   labelValue: {
     fontSize: 38,
     marginVertical: 10,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'white'
   },
   welcome: {
     fontSize: 20,

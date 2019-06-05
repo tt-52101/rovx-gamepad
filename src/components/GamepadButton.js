@@ -7,6 +7,7 @@ const buttons = {
   up: require('./up.json'),
   down: require('./down.json'),
   left: require('./left.json'),
+  circle: require('./circle.json'),
   right: require('./right.json')
 };
 
@@ -16,17 +17,21 @@ export class GamepadButton extends React.Component {
     if (onPressIn) {
       onPressIn(keyCode);
     }
-    this.ref.play();
+    this.ref.play(40, 60);
   };
+
+  componentDidMount() {
+    this.ref.play();
+  }
 
   onPressOut = () => {
     const { onPressOut, keyCode } = this.props;
     if (onPressOut) {
       onPressOut(keyCode);
     }
-    setTimeout(() => {
-      this.ref.reset();
-    }, 200);
+    // setTimeout(() => {
+    //   this.ref.reset();
+    // }, 200);
   };
 
   onPress = () => {
@@ -53,6 +58,8 @@ export class GamepadButton extends React.Component {
         onPress={this.onPress}
       >
         <LottieView
+          loop={false}
+          speed={3}
           source={this.source}
           ref={animation => {
             this.ref = animation;
