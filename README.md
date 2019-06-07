@@ -27,7 +27,7 @@ For more information, you need to look at the "React Native" project guidelines 
 
 ## Roadmap
 
-- [ ] Create an initial working gamepad with https requests
+- [x] Create an initial working gamepad with https requests
 - [ ] Implement joystick mode and advanced mode.
 - [ ] Release on Google Play
 - [ ] Release on AppStore

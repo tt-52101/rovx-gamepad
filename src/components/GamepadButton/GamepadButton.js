@@ -1,27 +1,37 @@
 import React from 'react';
 import LottieView from 'lottie-react-native';
+import { random } from 'lodash';
 import { TouchableOpacity } from 'react-native';
 
 const buttons = {
-  default: require('./default.json'),
-  up: require('./up.json'),
-  down: require('./down.json'),
-  left: require('./left.json'),
-  circle: require('./circle.json'),
-  right: require('./right.json')
+  default: require('./json/btn-default.json'),
+  up: require('./json/btn-up.json'),
+  down: require('./json/btn-down.json'),
+  left: require('./json/btn-left.json'),
+  circle: require('./json/btn-circle.json'),
+  triangle: require('./json/btn-triangle.json'),
+  cross: require('./json/btn-cross.json'),
+  rectangle: require('./json/btn-rectangle.json'),
+  right: require('./json/btn-right.json')
 };
+
+const REVERT_FRAME = 18;
+const MAX_FRAME = 30;
 
 export class GamepadButton extends React.Component {
   onPressIn = () => {
+    console.log('#2');
     const { onPressIn, keyCode } = this.props;
     if (onPressIn) {
       onPressIn(keyCode);
     }
-    this.ref.play(40, 60);
+    this.ref.play(MAX_FRAME, REVERT_FRAME);
   };
 
   componentDidMount() {
-    this.ref.play();
+    setTimeout(() => {
+      this.ref.play();
+    }, random(200, 900));
   }
 
   onPressOut = () => {
@@ -29,9 +39,6 @@ export class GamepadButton extends React.Component {
     if (onPressOut) {
       onPressOut(keyCode);
     }
-    // setTimeout(() => {
-    //   this.ref.reset();
-    // }, 200);
   };
 
   onPress = () => {
@@ -39,6 +46,10 @@ export class GamepadButton extends React.Component {
     if (onPress) {
       onPress(keyCode);
     }
+    setTimeout(() => {
+      this.ref.reset();
+      this.ref.play(REVERT_FRAME, MAX_FRAME);
+    }, 100);
   };
 
   get source() {
@@ -49,13 +60,21 @@ export class GamepadButton extends React.Component {
     return buttons['default'];
   }
 
+  onBlur = () => {
+    alert('yay!');
+  };
+
   render() {
     return (
       <TouchableOpacity
-        style={{ flex: 1 }}
+        style={{
+          flex: 1
+        }}
+        activeOpacity={1}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
         onPress={this.onPress}
+        onBlur={this.onBlur}
       >
         <LottieView
           loop={false}

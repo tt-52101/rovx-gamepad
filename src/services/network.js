@@ -1,12 +1,9 @@
-function post(url) {
-  console.log(url);
-  fetch(url, { method: 'POST' })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
+async function post(url) {
+  try {
+    return await fetch(url, { method: 'POST' });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function builtinLed(value = 'on') {

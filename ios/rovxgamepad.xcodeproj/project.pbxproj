@@ -39,7 +39,6 @@
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		3F1A51ACA3A24F61A6F62814 /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 958FE3CF96134F3D84D105DA /* libRNSVG-tvOS.a */; };
 		462BFB0FF9714B48B9DDC0C5 /* libLottieReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1DB1D4DF1E4231B2A288ED /* libLottieReactNative.a */; };
-		6D45951422A5C32A00BC0747 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6437E88F6AEF4B3AB91D1992 /* Lottie.framework */; };
 		6D45951722A5C4AC00BC0747 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D45950A22A5C2F300BC0747 /* Lottie.framework */; };
 		6D45951822A5C4AC00BC0747 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D45950A22A5C2F300BC0747 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -459,7 +458,6 @@
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				6D45951722A5C4AC00BC0747 /* Lottie.framework in Frameworks */,
-				6D45951422A5C32A00BC0747 /* Lottie.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				1A764949AD954B1599E714F6 /* libLottie.a in Frameworks */,

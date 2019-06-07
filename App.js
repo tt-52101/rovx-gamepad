@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, SafeAreaView, Text, View } from 'react-native';
-import { GamepadButton } from './src/components/GamepadButton.js';
 import { servoChange, escChange, builtinLed } from './src/services/network.js';
+import { GamepadButton } from './src/components/GamepadButton/GamepadButton.js';
 
 export default class App extends Component {
   // holds each button lottie refereneces
@@ -15,17 +15,21 @@ export default class App extends Component {
     };
   }
 
+  operateOnce = (field, t, callback) => {
+    this.setState(state => {
+      const value = t(state[field]);
+      if (callback) {
+        callback(value);
+      }
+      return {
+        [field]: value
+      };
+    });
+  };
+
   operateValue = (field, t, callback) => {
     this['interval_' + field] = setInterval(() => {
-      this.setState(state => {
-        const value = t(state[field]);
-        if (callback) {
-          callback(value);
-        }
-        return {
-          [field]: value
-        };
-      });
+      this.operateOnce(field, t, callback);
     }, 100);
   };
 
@@ -60,6 +64,22 @@ export default class App extends Component {
     );
   }
 
+  increaseAngel = () => {
+    this.operateValue('angel', t => t + 1, angel => servoChange(angel));
+  };
+
+  increaseAngelOnce = () => {
+    this.operateOnce('angel', t => t + 1, angel => servoChange(angel));
+  };
+
+  decreaseAngel = () => {
+    this.operateValue('angel', t => t - 1, angel => servoChange(angel));
+  };
+
+  decreaseAngelOnce = () => {
+    this.operateOnce('angel', t => t - 1, angel => servoChange(angel));
+  };
+
   Axis() {
     return (
       <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -67,24 +87,14 @@ export default class App extends Component {
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <GamepadButton
             keyCode="left"
-            onPressIn={() =>
-              this.operateValue(
-                'angel',
-                t => t - 1,
-                angel => servoChange(angel)
-              )
-            }
+            onPressIn={this.decreaseAngel}
+            onPress={this.decreaseAngelOnce}
             onPressOut={() => this.unoperate('angel')}
           />
           <GamepadButton
             keyCode="right"
-            onPressIn={() =>
-              this.operateValue(
-                'angel',
-                t => t + 1,
-                angel => servoChange(angel)
-              )
-            }
+            onPressIn={this.increaseAngel}
+            onPress={this.increaseAngelOnce}
             onPressOut={() => this.unoperate('angel')}
           />
         </View>
