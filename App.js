@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, SafeAreaView, Text, View } from 'react-native';
+import { magnetometer } from 'react-native-sensors';
+
 import { servoChange, escChange, builtinLed } from './src/services/network.js';
 import { GamepadButton } from './src/components/GamepadButton/GamepadButton.js';
+
+import { map, auditTime } from 'rxjs/operators';
 
 export default class App extends Component {
   // holds each button lottie refereneces
@@ -11,8 +15,31 @@ export default class App extends Component {
 
     this.state = {
       angel: 0,
-      speed: 40
+      speed: 40,
+      magnetometer: 'Not connected'
     };
+  }
+
+  componentDidMount() {
+    this.subscription = magnetometer
+      .pipe(
+        auditTime(60),
+        map(e => ({
+          x: e.x.toFixed(0),
+          y: e.y.toFixed(0)
+        }))
+      )
+      .subscribe(
+        ({ x, y, z, timestamp }) =>
+          this.setState({ magnetometer: { x, y, z, timestamp } }),
+        err => console.log('erro')
+      );
+  }
+
+  componentWillUnmount() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   operateOnce = (field, t, callback) => {
@@ -121,6 +148,9 @@ export default class App extends Component {
         <Text style={styles.labelValue}> {speed}</Text>
         <Text style={styles.label}>Angel</Text>
         <Text style={styles.labelValue}>{angel}</Text>
+        <Text style={styles.label}>
+          {JSON.stringify(this.state.magnetometer)}
+        </Text>
       </View>
     );
   }
