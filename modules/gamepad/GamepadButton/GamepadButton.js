@@ -41,6 +41,14 @@ export class GamepadButton extends React.Component {
     }
   };
 
+  fadeOut = () => {
+    this.ref.play(MAX_FRAME, 0);
+  };
+
+  fadeIn = () => {
+    this.ref.play(0, MAX_FRAME);
+  };
+
   onPress = () => {
     const { onPress, keyCode } = this.props;
     if (onPress) {
