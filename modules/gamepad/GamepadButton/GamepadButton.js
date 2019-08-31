@@ -16,7 +16,7 @@ const buttons = {
 };
 
 const REVERT_FRAME = 18;
-const MAX_FRAME = 30;
+const MAX_FRAME = 29;
 
 export class GamepadButton extends React.Component {
   onPressIn = () => {
@@ -25,7 +25,7 @@ export class GamepadButton extends React.Component {
     if (onPressIn) {
       onPressIn(keyCode);
     }
-    this.ref.play(MAX_FRAME, REVERT_FRAME);
+    // this.ref.play(MAX_FRAME, REVERT_FRAME);
   };
 
   componentDidMount() {
@@ -54,10 +54,10 @@ export class GamepadButton extends React.Component {
     if (onPress) {
       onPress(keyCode);
     }
-    setTimeout(() => {
-      this.ref.reset();
-      this.ref.play(REVERT_FRAME, MAX_FRAME);
-    }, 100);
+    // setTimeout(() => {
+    //   this.ref.reset();
+    //   this.ref.play(REVERT_FRAME, MAX_FRAME);
+    // }, 100);
   };
 
   get source() {

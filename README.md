@@ -25,6 +25,9 @@ For more information, you need to look at the "React Native" project guidelines 
 ![Screen](screenshot.png)
 
 
+![Screen](demo.gif)
+
+
 ## Roadmap
 
 - [x] Create an initial working gamepad with https requests
